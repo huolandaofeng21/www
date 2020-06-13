@@ -1,0 +1,60 @@
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:2.0.0'
+    }
+}
+
+
+plugins {
+    id 'java'
+    id 'war'
+    id 'idea'
+    id 'maven'
+}
+
+
+
+apply plugin: 'org.akhikhl.gretty'
+
+
+gretty {
+    httpPort  = 8080
+    contextPath  = '/mygrade'
+    host = 'localhost'
+    httpEnabled  = true
+    servletContainer = 'tomcat8'
+    scanInterval = 1
+    fastReload = true
+    loggingLevel  = 'DEBUG'
+    consoleLogEnabled  = true
+}
+
+
+group 'com.yibo.gradle'
+version '1.0-SNAPSHOT'
+
+
+
+repositories {
+    mavenCentral()
+}
+
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+}
+
+
+
+[compileJava,javadoc,compileTestJava]*.options*.encoding = 'UTF-8'
+
